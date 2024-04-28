@@ -1,0 +1,18 @@
+{
+  "name": "eagleortrails",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "game": "index.js",
+    "analysis": "analyzer.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "yargs": "^17.7.2"
+  }
+}
