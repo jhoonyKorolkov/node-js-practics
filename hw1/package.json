@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "cmd": "./index.js"
+    "cmd": "./index.js",
+    "game": "./game.js"
   },
   "main": "index.js",
   "scripts": {
