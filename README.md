@@ -1,10 +1,5 @@
-# Практические задачи от Нетологии
+# CLI Utility for "Weather in your city" 
 
-## Установка Node.js
+Этот проект содержит утилиту погоды в выбранном городе
 
-Загрузите установщик Node.js с официального сайта [Node.js](https://nodejs.org/).
-
-### Консольнные утилиты
-
-- в ветки `002-console` [первое дз](https://github.com/jhoonyKorolkov/node-js-practics/tree/002-console)
-- в ветки `004-stream` [второе дз](https://github.com/jhoonyKorolkov/node-js-practics/tree/004-stream)
+Запуск: `npm run dev`
