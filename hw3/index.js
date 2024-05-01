@@ -36,7 +36,8 @@ class WorldWeather {
         res.on("end", () => {
           try {
             const { current } = JSON.parse(data);
-            const result = `В городе ${this.city} температура ${current.temp_c}°C`;
+            const {temp_c} = current;
+            const result = `В городе ${this.city} температура ${temp_c}°C`;
             console.log(result);
           } catch (error) {
             console.error("Ошибка при парсинге данных:", error.message);
