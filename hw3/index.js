@@ -1,7 +1,7 @@
-const https = require("node:https");
-const readline = require("node:readline");
-const { stdin: input, stdout: output } = require("node:process");
-const { API_KEY, BASE_URL } = require("./config");
+import { get } from "node:https";
+import { createInterface } from "node:readline";
+import { stdin as input, stdout as output } from "node:process";
+import { API_KEY, BASE_URL } from "./config";
 
 class WorldWeather {
   constructor(city, apiKey, baseUrl) {
@@ -16,41 +16,39 @@ class WorldWeather {
   }
 
   getWeather() {
-    https
-      .get(this.apiUrl, (res) => {
-        const { statusCode } = res;
+    get(this.apiUrl, (res) => {
+      const { statusCode } = res;
 
-        if (statusCode !== 200) {
-          console.error(`Ошибка, статус код: ${statusCode}`);
-          res.resume();
-          return;
-        }
+      if (statusCode !== 200) {
+        console.error(`Ошибка, статус код: ${statusCode}`);
+        res.resume();
+        return;
+      }
 
-        res.setEncoding("utf-8");
-        let data = "";
+      res.setEncoding("utf-8");
+      let data = "";
 
-        res.on("data", (chunk) => {
-          data += chunk;
-        });
-
-        res.on("end", () => {
-          try {
-            const { current } = JSON.parse(data);
-            const { temp_c } = current;
-            const result = `В городе ${this.city} температура ${temp_c}°C`;
-            console.log(result);
-          } catch (error) {
-            console.error("Ошибка при парсинге данных:", error.message);
-          }
-        });
-      })
-      .on("error", (err) => {
-        console.error("Ошибка сетевого соединения:", err.message);
+      res.on("data", (chunk) => {
+        data += chunk;
       });
+
+      res.on("end", () => {
+        try {
+          const { current } = JSON.parse(data);
+          const { temp_c } = current;
+          const result = `В городе ${this.city} температура ${temp_c}°C`;
+          console.log(result);
+        } catch (error) {
+          console.error("Ошибка при парсинге данных:", error.message);
+        }
+      });
+    }).on("error", (err) => {
+      console.error("Ошибка сетевого соединения:", err.message);
+    });
   }
 }
 
-const rl = readline.createInterface({ input, output });
+const rl = createInterface({ input, output });
 
 rl.question("Введите название города: ", (city) => {
   const weather = new WorldWeather(city, API_KEY, BASE_URL);
